@@ -4,7 +4,7 @@
 
 ;; Author: Stefan Moeding <stm@kill-9.net>
 ;; URL: https://github.com/smoeding/emacs-augeas-mode
-;; Time-stamp: <2015-01-13 16:45:31 stm>
+;; Time-stamp: <2015-01-13 17:31:24 stm>
 ;; Keywords: languages
 ;; Version: 0.0.1
 
@@ -67,23 +67,32 @@
   "Keymap for Augeas mode.")
 
 (defconst augeas-keywords-regexp
-  (regexp-opt '("after" "autoload" "get" "in" "lens" "let" "module"
-                "put" "regexp" "string" "test") 'words)
+  (regexp-opt '("after" "autoload" "in" "lens" "let" "module" "regexp"
+                "string" "test")
+              'words)
   "Keywords to highlight in Augeas mode.")
 
 (defconst augeas-builtin-regexp
-  (regexp-opt '("counter" "del" "key" "label" "seq" "store" "value") 'words)
+  (regexp-opt '("clear" "counter" "del" "excl" "get" "getenv" "incl"
+                "insa" "insb" "key" "label" "lens_atype" "lens_ctype"
+                "lens_format_atype" "lens_ktype" "lens_vtype"
+                "print_endline" "print_regexp" "print_string" "print_tree"
+                "read_file" "regexp_match" "replace-match" "seq" "set"
+                "store" "transform" "value")
+              'words)
   "Builtins to highlight in Augeas mode.")
 
 (defvar augeas-font-lock-keywords
   `((,augeas-keywords-regexp . font-lock-keyword-face)
     (,augeas-builtin-regexp . font-lock-builtin-face)
-    ("\\<Util\\.[a-zA-Z_]+\\>" . font-lock-constant-face)
-    ("\\<[a-zA-z0-9]+\\>" . font-lock-variable-name-face)))
+    ("\\<Util\\.[A-Za-z_]+\\>" . font-lock-constant-face)
+    ("\\<[a-z][A-Za-z0-9_]*\\>" . font-lock-variable-name-face)))
 
-;; Derive from `prog-mode' if available and use `fundamental-mode' otherwise
 (defalias 'augeas-parent-mode
-  (if (fboundp 'prog-mode) 'prog-mode 'fundamental-mode))
+  (if (fboundp 'prog-mode) 'prog-mode 'fundamental-mode)
+  "The mode used as parent mode for `augeas-mode'.
+
+Either `prog-mode' if available or `fundamental-mode' otherwise.")
 
 
 ;;;###autoload
