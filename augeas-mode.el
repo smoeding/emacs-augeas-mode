@@ -4,7 +4,7 @@
 
 ;; Author: Stefan Moeding <stm@kill-9.net>
 ;; URL: https://github.com/smoeding/emacs-augeas-mode
-;; Time-stamp: <2015-01-13 17:31:24 stm>
+;; Time-stamp: <2015-01-14 20:20:08 stm>
 ;; Keywords: languages
 ;; Version: 0.0.1
 
@@ -107,9 +107,11 @@ Key bindings:
   (use-local-map augeas-mode-map)
   (set-syntax-table (make-syntax-table augeas-mode-syntax-table))
 
+  ;; Font lock
   (set (make-local-variable 'font-lock-defaults) '(augeas-font-lock-keywords))
   (set (make-local-variable 'require-final-newline) mode-require-final-newline)
 
+  ;; Comments
   (set (make-local-variable 'comment-start) "(*")
   (set (make-local-variable 'comment-end) "*)"))
 

@@ -1,10 +1,18 @@
 # Emacs major mode for Augeas
 
-This is a small hack to provide an Emacs major mode to write [Augeas](http://augeas.net/) lenses. I'm using this mode to write my own Augeas lenses to be used in Puppet.
+This is a small hack to provide an Emacs major mode to write [Augeas](http://augeas.net/) code. I'm using this mode to write my own Augeas lenses to be used in Puppet.
+
+The mode is still at an early stage.
+
+## Features
+
+Currently the following features are available:
+
+- Font lock for Augeas code
 
 ## Installation
 
-Put the file `augeas-mode.el` somewhere in your `load-path`. The put the following code in your init file (e.g. `~/.emacs.d/init.el`):
+Put the file `augeas-mode.el` somewhere in your `load-path`. Also add the following code to your init file (e.g. `~/.emacs.d/init.el`):
 
 ```elisp
 (autoload 'augeas-mode "augeas-mode" "Major mode for editing augeas files." t)
