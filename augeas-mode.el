@@ -4,7 +4,7 @@
 
 ;; Author: Stefan Moeding <stm@kill-9.net>
 ;; URL: https://github.com/smoeding/emacs-augeas-mode
-;; Time-stamp: <2015-01-14 20:20:08 stm>
+;; Time-stamp: <2015-01-14 20:30:40 stm>
 ;; Keywords: languages
 ;; Version: 0.0.1
 
@@ -86,7 +86,8 @@
   `((,augeas-keywords-regexp . font-lock-keyword-face)
     (,augeas-builtin-regexp . font-lock-builtin-face)
     ("\\<Util\\.[A-Za-z_]+\\>" . font-lock-constant-face)
-    ("\\<[a-z][A-Za-z0-9_]*\\>" . font-lock-variable-name-face)))
+    ("\\<[a-z][A-Za-z0-9_]*\\>" . font-lock-variable-name-face))
+  "Keywords used to highlight in Augeas mode.")
 
 (defalias 'augeas-parent-mode
   (if (fboundp 'prog-mode) 'prog-mode 'fundamental-mode)
