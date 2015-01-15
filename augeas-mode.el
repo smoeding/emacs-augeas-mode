@@ -4,7 +4,7 @@
 
 ;; Author: Stefan Moeding <stm@kill-9.net>
 ;; URL: https://github.com/smoeding/emacs-augeas-mode
-;; Time-stamp: <2015-01-15 17:00:19 stm>
+;; Time-stamp: <2015-01-15 17:01:37 stm>
 ;; Keywords: languages
 ;; Version: 0.0.1
 
@@ -102,10 +102,8 @@ Either `prog-mode' if available or `fundamental-mode' otherwise.")
 (define-derived-mode augeas-mode augeas-parent-mode "Augeas"
   "Major mode for editing augeas files.
 
-\\{augeas-mode-map}
 Turning on Augeas mode runs the normal hook `augeas-mode-hook'.
 
-Key bindings:
 \\{augeas-mode-map}"
   (use-local-map augeas-mode-map)
   (set-syntax-table (make-syntax-table augeas-mode-syntax-table))
