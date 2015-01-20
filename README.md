@@ -9,6 +9,7 @@ The mode is still at an early stage.
 Currently the following features are available:
 
 - Font lock for Augeas code
+- `compile` calls augparse to execute an Augeas module
 
 ## Installation
 
