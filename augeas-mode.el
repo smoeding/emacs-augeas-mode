@@ -4,7 +4,7 @@
 
 ;; Author: Stefan Moeding <stm@kill-9.net>
 ;; URL: https://github.com/smoeding/emacs-augeas-mode
-;; Time-stamp: <2015-01-17 20:35:13 stm>
+;; Time-stamp: <2015-01-20 16:33:48 stm>
 ;; Keywords: languages
 ;; Version: 0.0.1
 
@@ -49,6 +49,17 @@
   :link '(custom-group-link :tag "Font Lock Faces group" font-lock-faces)
   :prefix "augeas-"
   :group 'languages)
+
+(defcustom augeas-compile-command "augparse -I. -I.."
+  "Command to use when checking Augeas code."
+  :type 'string
+  :group 'augeas)
+
+(defun augeas-mode-compilation-buffer-name (&rest ignore)
+  "Return the name of Augeas compilation buffer.
+
+Argument IGNORE is not used here."
+  "*augparse*")
 
 (defvar augeas-mode-syntax-table
   (let ((st (make-syntax-table)))
@@ -108,6 +119,12 @@ Turning on Augeas mode runs the normal hook `augeas-mode-hook'.
 \\{augeas-mode-map}"
   (use-local-map augeas-mode-map)
   (set-syntax-table (make-syntax-table augeas-mode-syntax-table))
+
+  ;; Compilation
+  (set (make-local-variable 'compilation-buffer-name-function)
+       'augeas-mode-compilation-buffer-name)
+  (set (make-local-variable 'compile-command)
+       (concat augeas-compile-command " " (buffer-file-name)))
 
   ;; Font lock
   (set (make-local-variable 'font-lock-defaults) '(augeas-font-lock-keywords))
