@@ -4,7 +4,7 @@
 
 ;; Author: Stefan Moeding <stm@kill-9.net>
 ;; URL: https://github.com/smoeding/emacs-augeas-mode
-;; Time-stamp: <2015-01-20 16:33:48 stm>
+;; Time-stamp: <2015-01-24 10:09:27 stm>
 ;; Keywords: languages
 ;; Version: 0.0.1
 
@@ -60,6 +60,16 @@
 
 Argument IGNORE is not used here."
   "*augparse*")
+
+(defcustom augeas-mode-comment-start "(*"
+  "Comments in `augeas-mode' start with this characters."
+  :type 'string
+  :group 'augeas)
+
+(defcustom augeas-mode-comment-end "*)"
+  "Comments in `augeas-mode' end with this characters."
+  :type 'string
+  :group 'augeas)
 
 (defvar augeas-mode-syntax-table
   (let ((st (make-syntax-table)))
@@ -131,8 +141,8 @@ Turning on Augeas mode runs the normal hook `augeas-mode-hook'.
   (set (make-local-variable 'require-final-newline) mode-require-final-newline)
 
   ;; Comments
-  (set (make-local-variable 'comment-start) "(*")
-  (set (make-local-variable 'comment-end) "*)"))
+  (set (make-local-variable 'comment-start) augeas-mode-comment-start)
+  (set (make-local-variable 'comment-end) augeas-mode-comment-end))
 
 (provide 'augeas-mode)
 
