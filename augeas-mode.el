@@ -4,7 +4,7 @@
 
 ;; Author: Stefan Moeding <stm@kill-9.net>
 ;; URL: https://github.com/smoeding/emacs-augeas-mode
-;; Time-stamp: <2015-01-24 10:09:27 stm>
+;; Time-stamp: <2015-01-26 17:20:22 stm>
 ;; Keywords: languages
 ;; Version: 0.0.1
 
@@ -106,8 +106,8 @@ Argument IGNORE is not used here."
 (defvar augeas-font-lock-keywords
   `((,augeas-keywords-regexp . font-lock-keyword-face)
     (,augeas-builtin-regexp . font-lock-builtin-face)
-    ("\\<\\(?:module\\|test\\) +\\([A-Z][A-Za-z0-9_]*\\)\\>"
-     1 font-lock-function-name-face)
+    ("\\<module +\\([A-Z][A-Za-z0-9_]*\\)\\>" 1 font-lock-function-name-face)
+    ("\\<test +\\([A-Za-z0-9._]*\\)\\>" 1 font-lock-function-name-face)
     ("\\_</.*[^\\\\]/\\_>" . font-lock-string-face)
     ("\\<[A-Z][A-Za-z0-9_]*\\.[a-z][A-Za-z0-9_]+\\>" . font-lock-constant-face)
     ("\\<[a-z][A-Za-z0-9_]*\\>" . font-lock-variable-name-face))
