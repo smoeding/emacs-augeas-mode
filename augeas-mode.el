@@ -4,9 +4,9 @@
 
 ;; Author: Stefan Moeding <stm@kill-9.net>
 ;; URL: https://github.com/smoeding/emacs-augeas-mode
-;; Time-stamp: <2015-01-26 17:20:22 stm>
+;; Time-stamp: <2017-03-22 18:58:37 stm>
 ;; Keywords: languages
-;; Version: 0.0.1
+;; Version: 0.0.2
 
 ;; This file is NOT part of GNU Emacs.
 
@@ -38,11 +38,16 @@
 
 ;;; Change Log:
 ;;
+;; 2017-03-22 stm
+;;     Implement syntax-propertize-function to fontify regex/strings
+;;
 ;; 2015-01-12 stm
 ;;     Initial version.
 ;;
 
 ;;; Code:
+
+(require 'rx)
 
 (defgroup augeas nil
   "Major mode for editing Augeas code."
@@ -74,8 +79,8 @@ Argument IGNORE is not used here."
 (defvar augeas-mode-syntax-table
   (let ((st (make-syntax-table)))
       (modify-syntax-entry ?_ "w"    st)
-      (modify-syntax-entry ?\( ". 1" st)
-      (modify-syntax-entry ?\) ". 4" st)
+      (modify-syntax-entry ?\( "()1" st)
+      (modify-syntax-entry ?\) ")(4" st)
       (modify-syntax-entry ?* ". 23" st)
       st)
   "Syntax table used when in `augeas-mode'.")
@@ -108,10 +113,36 @@ Argument IGNORE is not used here."
     (,augeas-builtin-regexp . font-lock-builtin-face)
     ("\\<module +\\([A-Z][A-Za-z0-9_]*\\)\\>" 1 font-lock-function-name-face)
     ("\\<test +\\([A-Za-z0-9._]*\\)\\>" 1 font-lock-function-name-face)
-    ("\\_</.*[^\\\\]/\\_>" . font-lock-string-face)
     ("\\<[A-Z][A-Za-z0-9_]*\\.[a-z][A-Za-z0-9_]+\\>" . font-lock-constant-face)
     ("\\<[a-z][A-Za-z0-9_]*\\>" . font-lock-variable-name-face))
   "Keywords used to highlight in Augeas mode.")
+
+(defun augeas-syntax-propertize-function (start end)
+  "Add syntax properties for augeas-mode between START and END."
+  (funcall
+   (syntax-propertize-rules
+    ;; quoted strings enclosed in "..."
+    ((rx (group "\"")                        ; start with a quote
+         (*? (| (seq "\\" anything)          ; any escaped character or
+                (not (in ?\" "\\"))))        ; anything else except these
+         (group "\""))
+     (1 "|") (2 "|"))                        ; finish with a quote
+    ;; regular expressions enclosed in /.../
+    ((rx (group "/")                         ; start with a slash
+         (*? (| (seq "\\" anything)          ; any escaped character or
+                (seq "["                     ; a character class containing
+                     (*? (| (seq "\\" anything) ; any escaped character or
+                            (not (in "]"))))    ; anything else except a ]
+                     "]")                    ; or
+                (not (in "/" "\\" "["))))    ; anything except these
+         (group "/"))
+     (1 "|") (2 "|"))
+    ;; comments enclosed in (* ... *)
+    ((rx (group "(*")                        ; comment start
+         (*? anything)
+         (group "*)"))                       ; comment end
+     (1 "!") (2 "!")))
+   start end))
 
 (defalias 'augeas-parent-mode
   (if (fboundp 'prog-mode) 'prog-mode 'fundamental-mode)
@@ -138,6 +169,9 @@ Turning on Augeas mode runs the normal hook `augeas-mode-hook'.
 
   ;; Font lock
   (set (make-local-variable 'font-lock-defaults) '(augeas-font-lock-keywords))
+  (set (make-local-variable 'syntax-propertize-function)
+       #'augeas-syntax-propertize-function)
+
   (set (make-local-variable 'require-final-newline) mode-require-final-newline)
 
   ;; Comments
