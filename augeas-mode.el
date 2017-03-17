@@ -74,6 +74,8 @@ Argument IGNORE is not used here."
 (defvar augeas-mode-syntax-table
   (let ((st (make-syntax-table)))
       (modify-syntax-entry ?_ "w"    st)
+      (modify-syntax-entry ?\" "\"" st)
+      (modify-syntax-entry ?/ "\"" st)
       (modify-syntax-entry ?\( ". 1" st)
       (modify-syntax-entry ?\) ". 4" st)
       (modify-syntax-entry ?* ". 23" st)
@@ -108,7 +110,6 @@ Argument IGNORE is not used here."
     (,augeas-builtin-regexp . font-lock-builtin-face)
     ("\\<module +\\([A-Z][A-Za-z0-9_]*\\)\\>" 1 font-lock-function-name-face)
     ("\\<test +\\([A-Za-z0-9._]*\\)\\>" 1 font-lock-function-name-face)
-    ("\\_</.*[^\\\\]/\\_>" . font-lock-string-face)
     ("\\<[A-Z][A-Za-z0-9_]*\\.[a-z][A-Za-z0-9_]+\\>" . font-lock-constant-face)
     ("\\<[a-z][A-Za-z0-9_]*\\>" . font-lock-variable-name-face))
   "Keywords used to highlight in Augeas mode.")
