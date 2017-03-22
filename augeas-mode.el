@@ -4,7 +4,7 @@
 
 ;; Author: Stefan Moeding <stm@kill-9.net>
 ;; URL: https://github.com/smoeding/emacs-augeas-mode
-;; Time-stamp: <2017-03-22 18:58:37 stm>
+;; Time-stamp: <2017-03-22 18:59:31 stm>
 ;; Keywords: languages
 ;; Version: 0.0.2
 
@@ -78,11 +78,11 @@ Argument IGNORE is not used here."
 
 (defvar augeas-mode-syntax-table
   (let ((st (make-syntax-table)))
-      (modify-syntax-entry ?_ "w"    st)
-      (modify-syntax-entry ?\( "()1" st)
-      (modify-syntax-entry ?\) ")(4" st)
-      (modify-syntax-entry ?* ". 23" st)
-      st)
+    (modify-syntax-entry ?_ "w"    st)
+    (modify-syntax-entry ?\( "()1" st)
+    (modify-syntax-entry ?\) ")(4" st)
+    (modify-syntax-entry ?* ". 23" st)
+    st)
   "Syntax table used when in `augeas-mode'.")
 
 (defvar augeas-mode-map
