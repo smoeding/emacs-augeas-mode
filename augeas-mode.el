@@ -4,7 +4,7 @@
 
 ;; Author: Stefan Moeding <stm@kill-9.net>
 ;; URL: https://github.com/smoeding/emacs-augeas-mode
-;; Time-stamp: <2017-03-22 19:01:03 stm>
+;; Time-stamp: <2017-03-22 19:03:00 stm>
 ;; Keywords: languages
 ;; Version: 0.0.2
 
@@ -116,7 +116,7 @@
   "Keywords used to highlight in Augeas mode.")
 
 (defun augeas-syntax-propertize-function (start end)
-  "Add syntax properties for augeas-mode between START and END."
+  "Add syntax properties for ‘augeas-mode’ between START and END."
   (funcall
    (syntax-propertize-rules
     ;; quoted strings enclosed in "..."
