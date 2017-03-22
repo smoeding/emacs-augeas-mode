@@ -1,10 +1,10 @@
-;;; augeas-mode.el --- Augeas editing
+;;; augeas-mode.el --- Augeas editing -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2015 Stefan Moeding
 
 ;; Author: Stefan Moeding <stm@kill-9.net>
 ;; URL: https://github.com/smoeding/emacs-augeas-mode
-;; Time-stamp: <2017-03-22 18:59:31 stm>
+;; Time-stamp: <2017-03-22 19:01:03 stm>
 ;; Keywords: languages
 ;; Version: 0.0.2
 
@@ -60,10 +60,8 @@
   :type 'string
   :group 'augeas)
 
-(defun augeas-mode-compilation-buffer-name (&rest ignore)
-  "Return the name of Augeas compilation buffer.
-
-Argument IGNORE is not used here."
+(defun augeas-mode-compilation-buffer-name (&rest _)
+  "Return the name of Augeas compilation buffer."
   "*augparse*")
 
 (defcustom augeas-mode-comment-start "(*"
