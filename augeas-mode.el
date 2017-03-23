@@ -4,9 +4,9 @@
 
 ;; Author: Stefan Moeding <stm@kill-9.net>
 ;; URL: https://github.com/smoeding/emacs-augeas-mode
-;; Time-stamp: <2017-03-22 19:03:00 stm>
+;; Time-stamp: <2017-03-23 18:42:39 stm>
 ;; Keywords: languages
-;; Version: 0.0.2
+;; Version: 0.0.3
 
 ;; This file is NOT part of GNU Emacs.
 
@@ -37,6 +37,9 @@
 ;;
 
 ;;; Change Log:
+;;
+;; 2017-03-23 stm
+;;     Update list of keywords
 ;;
 ;; 2017-03-22 stm
 ;;     Implement syntax-propertize-function to fontify regex/strings
@@ -101,7 +104,7 @@
                 "insa" "insb" "key" "label" "lens_atype" "lens_ctype"
                 "lens_format_atype" "lens_ktype" "lens_vtype"
                 "print_endline" "print_regexp" "print_string" "print_tree"
-                "read_file" "regexp_match" "replace-match" "seq" "set"
+                "put" "read_file" "regexp_match" "rm" "seq" "set" "square"
                 "store" "transform" "value")
               'words)
   "Builtins to highlight in Augeas mode.")
